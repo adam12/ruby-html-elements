@@ -29,8 +29,8 @@ class BackrefScanner
 
   def initialize(string)
     @string = string.dup
-    @self_closed_tag_template = "<%%= render \"%{component_name}\", locals: { %{merged_attrs} } %%>"
-    @tag_template = "<%%= render \"%{component_name}\", locals: { \"content\" => \"%{content}\", %{merged_attrs} } %%>\n"
+    @self_closed_tag_template = %{<%%= render "%{component_name}", locals: { %{merged_attrs} } %%>}
+    @tag_template = %{<%%= render "%{component_name}", locals: { "content" => "%{content}", %{merged_attrs} } %%>\n}
   end
 
   def scan
