@@ -46,12 +46,19 @@ The project [Selma][selma] is interesting, and is a wrapper around [lol-html][lo
 I tried Selma but it wouldn't accept a tag with a colon in it.
 
 
+## Benchmarks
+
+Interestingly, the version of StringScanner is slower. The backreference scanner is comparable to the regular regular expression scanner.
+
+Benchmarks are available [here][5].
+
 [blade]: https://github.com/laravel/framework/blob/769f00ba71de3b3cbbb271e9f34a019b584982c9/src/Illuminate/View/Compilers/ComponentTagCompiler.php#L104-L158
 [heex]: https://github.com/phoenixframework/phoenix_live_view/blob/5ea624b5323e1f9791f4c056db223d952ecc3e0e/lib/phoenix_live_view/tokenizer.ex#L148-L156
 [1]: re_scanner.rb
 [2]: scanner.rb
 [3]: pipeline.rb
 [4]: backref_scanner.rb
+[5]: benchmark.rb
 [zalgo]: https://stackoverflow.com/a/1732454
 [selma]: https://github.com/gjtorikian/selma
 [lol-html]: https://github.com/cloudflare/lol-html
