@@ -5,7 +5,7 @@ This is just an experiment on what parsing out custom HTML elements in Ruby migh
 
 ## Using regular expressions
 
-Using a regular expression to parse HTML runs the risk of summoning Zalgo, but for simple scenarios it might be OK.
+Using a regular expression to parse HTML runs the risk of summoning [Zalgo][zalgo], but for simple scenarios it might be OK.
 
 This is how it's done in Laravel's [Blade][blade]. I'm not a huge fan of the approach (especially of the regular expressions in Blade) but if the expression is simple enough to understand it's OK.
 
@@ -33,3 +33,4 @@ I expected the StringScanner approach to be faster but it was actually slower th
 [heex]: https://github.com/phoenixframework/phoenix_live_view/blob/5ea624b5323e1f9791f4c056db223d952ecc3e0e/lib/phoenix_live_view/tokenizer.ex#L148-L156
 [1]: re_scanner.rb
 [2]: scanner.rb
+[zalgo]: https://stackoverflow.com/a/1732454
