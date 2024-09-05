@@ -2,6 +2,11 @@
 
 This is just an experiment on what parsing out custom HTML elements in Ruby might look like, similar to how the custom HTML elements are done in something similar to Laravel's Blade.
 
+Goals if one should exist:
+
+- Not conflict with existing elements or native custom elements
+- Be reasonably fast
+- Preserve line numbers where stacktraces matter
 
 ## Using regular expressions
 
