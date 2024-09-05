@@ -2,6 +2,8 @@
 
 # Scanner which parses HTML using gsub! but with backreferences
 class BackrefScanner
+  # Borrowed from here and modified
+  # https://github.com/kkos/oniguruma/blob/b6c8d55ac402fd89e448153bc4f827ae1ee65840/doc/RE#L447C11-L454C17
   TAG = Regexp.compile(<<~'__REGEXP__'.strip, Regexp::EXTENDED)
     (?<element> \g<stag> \g<content>* \g<etag> ){0}
     (?<stag> < \g<name> \s* \g<attributes> >){0}
