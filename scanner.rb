@@ -2,6 +2,7 @@
 
 require "strscan"
 
+# Scanner which parses HTML using the StringScanner class
 class Scanner
   OPENING_TAG = /
     <
