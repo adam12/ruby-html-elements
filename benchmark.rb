@@ -30,7 +30,7 @@ end
 
 __END__
 
-ruby --yjit benchmark.rb
+$ ruby --yjit benchmark.rb
 ruby 3.3.4 (2024-07-09 revision be1089c8ec) +YJIT [arm64-darwin23]
 Warming up --------------------------------------
              Scanner     1.549k i/100ms
