@@ -6,16 +6,16 @@ require "strscan"
 class Scanner
   OPENING_TAG = /
     <
-      (\w+:\w+) # Tag name
-      ([^>]*?)  # Attributes
-      (\/?)     # Optional self-closing flag
+      (?<name> \w+:\w+)       # Tag name
+      (?<attributes> [^>]*?)  # Attributes
+      (?<self_close> \/?)     # Optional self-closing flag
     >
   /mx
 
   ATTRIBUTE = /
-    ([^=]+)     # Attribute name
-    =           # Literal equals sign
-    "([^"]*)"   # Attribute value
+    ([^=]+)                   # Attribute name
+    =                         # Literal equals sign
+    "([^"]*)"                 # Attribute value
   /mx
 
   def initialize(string)
@@ -29,9 +29,9 @@ class Scanner
 
     until @scanner.eos?
       if @scanner.scan(OPENING_TAG) 
-        component_name = @scanner[1]
-        attributes = @scanner[2].strip
-        self_close = @scanner[3] == "/"
+        component_name = @scanner[:name]
+        attributes = @scanner[:attributes].strip
+        self_close = @scanner[:self_close] == "/"
 
         attrs = extract_attributes(attributes)
         merged_attrs = merge_attributes(attrs)

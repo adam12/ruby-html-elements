@@ -4,30 +4,30 @@
 class ReScanner
   TAG = %r{
     <
-      \s* # Ignore leading whitespace
-      ([a-zA-Z0-9]+:[a-zA-Z0-9]+) # Tag name
-      ([^>]*?)  # Attributes
-      \s* # Ignore trailing whitespace
+      \s*                                 # Ignore leading whitespace
+      (?<name> [a-zA-Z0-9]+:[a-zA-Z0-9]+) # Tag name
+      (?<attributes> [^>]*?)              # Attributes
+      \s*                                 # Ignore trailing whitespace
     >
-      (.*?) # All content
+      (?<content> .*?)                    # All content
     </
-      \1 # Closing tag
+      \g<name>                            # Closing tag
     >
   }mx
 
   SELF_CLOSING_TAG = %r{
     <
-      \s* # Ignore leading whitespace
-      ([a-zA-Z0-9]+:[a-zA-Z0-9]+) # Tag name
-      ([^>]*?)  # Attributes
-      \s* # Ignore trailing whitespace
+      \s*                                 # Ignore leading whitespace
+      (?<name> [a-zA-Z0-9]+:[a-zA-Z0-9]+) # Tag name
+      (?<attributes> [^>]*?)              # Attributes
+      \s*                                 # Ignore trailing whitespace
     />
   }mx
 
   ATTRIBUTE = /
-    ([^=]+)     # Attribute name
-    =           # Literal equals sign
-    "([^"]*)"   # Attribute value
+    ([^=]+)                               # Attribute name
+    =                                     # Literal equals sign
+    "([^"]*)"                             # Attribute value
   /mx
 
   def initialize(string)
@@ -38,8 +38,8 @@ class ReScanner
 
   def scan
     @string.gsub!(SELF_CLOSING_TAG) do |match|
-      component_name = $1
-      attributes = $2
+      component_name = $~[:name]
+      attributes = $~[:attributes]
       attrs = extract_attributes(attributes)
 
       format(@self_closed_tag_template, {
@@ -49,9 +49,9 @@ class ReScanner
     end
 
     @string.gsub!(TAG) do |match|
-      component_name = $1
-      attributes = $2
-      content = $3.to_s
+      component_name = $~[:name]
+      attributes = $~[:attributes]
+      content = $~[:content].to_s
 
       attrs = extract_attributes(attributes)
 
