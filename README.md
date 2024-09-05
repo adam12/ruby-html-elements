@@ -41,10 +41,9 @@ The [BackrefScanner][4] uses a regular expression + gsub! and is of comparable s
 
 ## Using another library
 
-The project [Selma][selma] is interesting, and is a wrapper around [lol-html][lol-html] which is also interesting.
+The project [Selma][selma] is interesting, and is a wrapper around [lol-html][lol-html] which is also interesting. I tried Selma but it wouldn't accept a tag with a colon in it.
 
-I tried Selma but it wouldn't accept a tag with a colon in it.
-
+I don't believe Nokogiri or Oga will preserve whitespace/etc. I'd like to ensure stacktraces remain consistent which means either keeping line numbers inside templates the same, rewriting the stacktrace, or using some sort of sourcemap mechanism. 
 
 ## Benchmarks
 
