@@ -33,9 +33,11 @@ The [StringScanner][2] approach feels like it would decompose easier if more fun
 
 I expected the StringScanner approach to be faster but it was actually slower than the gsub approach. I haven't looked into why.
 
+
 ## Backreference scanner
 
 The [BackrefScanner][4] uses a regular expression + gsub! and is of comparable speed to the other regular expression scanner, but tracks references and can theoretically handle nested HTML elements more correctly.
+
 
 ## Using another library
 
