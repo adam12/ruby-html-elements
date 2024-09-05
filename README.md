@@ -33,6 +33,10 @@ The [StringScanner][2] approach feels like it would decompose easier if more fun
 
 I expected the StringScanner approach to be faster but it was actually slower than the gsub approach. I haven't looked into why.
 
+## Backreference scanner
+
+The [BackrefScanner][4] uses a regular expression + gsub! and is of comparable speed to the other regular expression scanner, but tracks references and can theoretically handle nested HTML elements more correctly.
+
 ## Using another library
 
 The project [Selma][selma] is interesting, and is a wrapper around [lol-html][lol-html] which is also interesting.
@@ -45,6 +49,7 @@ I tried Selma but it wouldn't accept a tag with a colon in it.
 [1]: re_scanner.rb
 [2]: scanner.rb
 [3]: pipeline.rb
+[4]: backref_scanner.rb
 [zalgo]: https://stackoverflow.com/a/1732454
 [selma]: https://github.com/gjtorikian/selma
 [lol-html]: https://github.com/cloudflare/lol-html
