@@ -33,11 +33,8 @@ class Scanner
         attributes = @scanner[2].strip
         self_close = @scanner[3] == "/"
 
-        attrs = attributes.scan(ATTRIBUTE).each_with_object({}) do |(key, value), attrs|
-          attrs[key] = value
-        end
-
-        merged_attrs = attrs.map { |k, v| "#{k.inspect} => #{v.inspect}" }.join(" ")
+        attrs = extract_attributes(attributes)
+        merged_attrs = merge_attributes(attrs)
 
         if self_close
           output << format(@self_closed_tag_template, {
@@ -67,5 +64,15 @@ class Scanner
     end
 
     output
+  end
+
+  def extract_attributes(string)
+    string.scan(ATTRIBUTE).each_with_object({}) do |(key, value), attrs|
+      attrs[key.strip] = value.strip
+    end
+  end
+
+  def merge_attributes(hash)
+    hash.map { |k, v| "#{k.inspect} => #{v.inspect}" }.join(" ")
   end
 end

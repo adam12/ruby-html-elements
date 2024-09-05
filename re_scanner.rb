@@ -40,16 +40,11 @@ class ReScanner
     @string.gsub!(SELF_CLOSING_TAG) do |match|
       component_name = $1
       attributes = $2
-
-      attrs = attributes.scan(ATTRIBUTE).each_with_object({}) do |(key, value), attrs|
-        attrs[key.strip] = value.strip
-      end
-
-      merged_attrs = attrs.map { |k, v| "#{k.inspect} => #{v.inspect}" }.join(" ")
+      attrs = extract_attributes(attributes)
 
       format(@self_closed_tag_template, {
         component_name: component_name,
-        merged_attrs: merged_attrs
+        merged_attrs: merge_attributes(attrs)
       })
     end
 
@@ -58,19 +53,25 @@ class ReScanner
       attributes = $2
       content = $3.to_s
 
-      attrs = attributes.scan(ATTRIBUTE).each_with_object({}) do |(key, value), attrs|
-        attrs[key.strip] = value.strip
-      end
-
-      merged_attrs = attrs.map { |k, v| "#{k.inspect} => #{v.inspect}" }.join(" ")
+      attrs = extract_attributes(attributes)
 
       format(@tag_template, {
         component_name: component_name,
-        merged_attrs: merged_attrs,
+        merged_attrs: merge_attributes(attrs),
         content: content.strip.gsub(/\n/, '\n')
       }) + "\n"
     end
  
     @string
+  end
+
+  def extract_attributes(string)
+    string.scan(ATTRIBUTE).each_with_object({}) do |(key, value), attrs|
+      attrs[key.strip] = value.strip
+    end
+  end
+
+  def merge_attributes(hash)
+    hash.map { |k, v| "#{k.inspect} => #{v.inspect}" }.join(" ")
   end
 end
