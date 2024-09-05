@@ -22,12 +22,14 @@ I think this would make sense as part of a Tilt pipeline. An example (pipeline.r
 
 ## Regular expressions + gsub vs Regular expressions + StringScanner
 
-The regular expression + gsub approach is shorter, but I don't see it scaling if the elements became more complex.
+The [regular expression + gsub approach][1] is shorter, but I don't see it scaling if the elements became more complex.
 
-The StringScanner approach feels like it would decompose easier if more functionality was necessary.
+The [StringScanner][2] approach feels like it would decompose easier if more functionality was necessary.
 
 I expected the StringScanner approach to be faster but it was actually slower than the gsub approach. I haven't looked into why.
 
 
 [blade]: https://github.com/laravel/framework/blob/769f00ba71de3b3cbbb271e9f34a019b584982c9/src/Illuminate/View/Compilers/ComponentTagCompiler.php#L104-L158
 [heex]: https://github.com/phoenixframework/phoenix_live_view/blob/5ea624b5323e1f9791f4c056db223d952ecc3e0e/lib/phoenix_live_view/tokenizer.ex#L148-L156
+[1]: re_scanner.rb
+[2]: scanner.rb
