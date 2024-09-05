@@ -22,7 +22,7 @@ Elixir's HEEX appears to tokenize the [HTML][heex] and then transform it. I can 
 
 ## Tilt pipeline
 
-I think this would make sense as part of a Tilt pipeline. An example (pipeline.rb)[pipeline.rb]) is included.
+I think this would make sense as part of a Tilt pipeline. An example [pipeline.rb][3] is included.
 
 
 ## Regular expressions + gsub vs Regular expressions + StringScanner
@@ -44,6 +44,7 @@ I tried Selma but it wouldn't accept a tag with a colon in it.
 [heex]: https://github.com/phoenixframework/phoenix_live_view/blob/5ea624b5323e1f9791f4c056db223d952ecc3e0e/lib/phoenix_live_view/tokenizer.ex#L148-L156
 [1]: re_scanner.rb
 [2]: scanner.rb
+[3]: pipeline.rb
 [zalgo]: https://stackoverflow.com/a/1732454
 [selma]: https://github.com/gjtorikian/selma
 [lol-html]: https://github.com/cloudflare/lol-html
