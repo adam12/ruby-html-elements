@@ -2,6 +2,7 @@ require "bundler/setup"
 require "benchmark/ips"
 require_relative "scanner"
 require_relative "re_scanner"
+require_relative "backref_scanner"
 
 STRING = <<~'EOM'
 1 This is outside of the component
@@ -25,6 +26,8 @@ Benchmark.ips do |x|
 
   x.report("ReScanner") { ReScanner.new(STRING).scan }
 
+  x.report("BackrefScanner") { BackrefScanner.new(STRING).scan }
+
   x.compare!
 end
 
@@ -33,12 +36,15 @@ __END__
 $ ruby --yjit benchmark.rb
 ruby 3.3.4 (2024-07-09 revision be1089c8ec) +YJIT [arm64-darwin23]
 Warming up --------------------------------------
-             Scanner     1.549k i/100ms
-           ReScanner     7.382k i/100ms
+             Scanner     1.578k i/100ms
+           ReScanner     4.258k i/100ms
+      BackrefScanner     4.600k i/100ms
 Calculating -------------------------------------
-             Scanner     15.391k (± 2.0%) i/s -     77.450k in   5.034103s
-           ReScanner     69.458k (± 1.2%) i/s -    354.336k in   5.102207s
+             Scanner     14.622k (±12.3%) i/s -     72.588k in   5.074484s
+           ReScanner     65.387k (±13.9%) i/s -    315.092k in   5.002886s
+      BackrefScanner     66.842k (± 5.1%) i/s -    335.800k in   5.043488s
 
 Comparison:
-           ReScanner:    69458.3 i/s
-             Scanner:    15391.2 i/s - 4.51x  slower
+      BackrefScanner:    66841.8 i/s
+           ReScanner:    65386.8 i/s - same-ish: difference falls within error
+             Scanner:    14621.7 i/s - 4.57x  slower
