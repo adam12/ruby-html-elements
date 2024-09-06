@@ -51,6 +51,13 @@ Interestingly, the version of StringScanner is slower. The backreference scanner
 
 Benchmarks are available [here][5].
 
+## What's missing
+
+I realized after doing this experiment that a big piece of this would be broken in real use - the passing of variables into components. A component that has `some-attr="<%= some_value %>"` as an attribute would end up with an un-evaluated ERB block as a value, at least if using the example Tilt Pipeline feature.
+
+Not sure how I'd approach this yet - maybe 2 passes on the template? Anything inside a component is parsed/evaluated, then the components are extracted, and then the second pass is parsed/evaluated? At least when using ERB.
+
+
 [blade]: https://github.com/laravel/framework/blob/769f00ba71de3b3cbbb271e9f34a019b584982c9/src/Illuminate/View/Compilers/ComponentTagCompiler.php#L104-L158
 [heex]: https://github.com/phoenixframework/phoenix_live_view/blob/5ea624b5323e1f9791f4c056db223d952ecc3e0e/lib/phoenix_live_view/tokenizer.ex#L148-L156
 [1]: re_scanner.rb
